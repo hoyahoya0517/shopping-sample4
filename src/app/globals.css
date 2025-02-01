@@ -28,6 +28,7 @@ body {
   --main-color: #7c1b25;
   --gray-color: #cacbdc;
   --graygray-color: rgba(18, 17, 16, 0.6);
+  --message-font-color: #41a1e6;
 }
 input,
 button {

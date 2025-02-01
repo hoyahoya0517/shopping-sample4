@@ -16,6 +16,7 @@ export default function ForgotPassword() {
     try {
       await forgotPassword(email);
       setIsSending(false);
+      setMessage("");
       setIsSendEmail(true);
     } catch (error: any) {
       if (error.digest === "unregistered user") {

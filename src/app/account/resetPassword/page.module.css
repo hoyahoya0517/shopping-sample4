@@ -63,7 +63,7 @@
 }
 .message {
   align-self: flex-start;
-  color: red;
+  color: var(--message-font-color);
   word-break: break-all;
   overflow-wrap: break-word;
   max-width: 100%;
