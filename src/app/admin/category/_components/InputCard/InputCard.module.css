@@ -1,0 +1,29 @@
+.inputCard {
+  width: 100%;
+  display: flex;
+}
+.inputCartInput {
+  flex: 1;
+  display: flex;
+}
+.inputCartInput input {
+  width: 100%;
+  height: 100%;
+}
+.inputCardButton {
+  flex-basis: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.inputCardButton button {
+  border: none;
+  background-color: transparent;
+  padding: 5px;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .inputCardButton {
+    flex-basis: 15%;
+  }
+}

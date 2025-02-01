@@ -1,0 +1,52 @@
+.footer {
+  background-color: transparent;
+  position: relative;
+  width: 100%;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 48px 50px 12px 50px;
+  gap: 12px;
+}
+.top {
+  width: 100%;
+  display: flex;
+  gap: 12px;
+}
+.top span {
+  flex-basis: 15%;
+  cursor: pointer;
+}
+.topMenu {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.topMenu a {
+  padding-right: 16px;
+}
+.bottom {
+  font-size: 0.7rem;
+  align-self: flex-start;
+}
+.safePurchase {
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .main {
+    padding: 48px 20px 12px 20px;
+    gap: 12px;
+  }
+  .top {
+    flex-direction: column-reverse;
+  }
+  .topMenu {
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+}
