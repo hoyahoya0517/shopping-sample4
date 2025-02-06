@@ -24,39 +24,41 @@ export default function ImageCard({
       <div className={styles.image}>
         <img src={url} />
       </div>
-      <div className={styles.url}>
-        <input
-          disabled={!isUpdate}
-          value={url}
-          onChange={(e) => {
-            setUrl(e.target.value);
-          }}
-        />
-      </div>
-      <div className={styles.updateButton}>
-        {isUpdate ? (
-          <button
-            onClick={() => {
-              const tmpImg = img.slice();
-              tmpImg[index] = url;
-              setImg(tmpImg);
-              setIsUpdate(false);
+      <div className={styles.buttonInput}>
+        <div className={styles.url}>
+          <input
+            disabled={!isUpdate}
+            value={url}
+            onChange={(e) => {
+              setUrl(e.target.value);
             }}
-          >
-            확인
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              setIsUpdate(true);
-            }}
-          >
-            수정
-          </button>
-        )}
-      </div>
-      <div className={styles.delete}>
-        <button onClick={handleDelete}>삭제</button>
+          />
+        </div>
+        <div className={styles.updateButton}>
+          {isUpdate ? (
+            <button
+              onClick={() => {
+                const tmpImg = img.slice();
+                tmpImg[index] = url;
+                setImg(tmpImg);
+                setIsUpdate(false);
+              }}
+            >
+              저장
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                setIsUpdate(true);
+              }}
+            >
+              수정
+            </button>
+          )}
+        </div>
+        <div className={styles.delete}>
+          <button onClick={handleDelete}>삭제</button>
+        </div>
       </div>
     </div>
   );

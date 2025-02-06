@@ -7,8 +7,6 @@ import { useEffect, useState } from "react";
 import { deleteAdminUser, updateAdminUser } from "@/actions/admin";
 import OrderCard from "../OrderCard/OrderCard";
 import dayjs from "dayjs";
-import { BsChevronUp } from "react-icons/bs";
-import { mainColor } from "@/app/_config/ColorSetting";
 
 export default function AdminUserCard({ user }: { user: UserType }) {
   const queryClient = useQueryClient();
@@ -84,14 +82,14 @@ export default function AdminUserCard({ user }: { user: UserType }) {
           <div className={styles.userInfoLeft}>
             {isClick ? (
               <div className={styles.emailIsClick}>
-                <span
+                {/* <span
                   className={styles.upIcon}
                   onClick={() => {
                     setIsClick(false);
                   }}
                 >
                   <BsChevronUp color={`${mainColor}`} size={20} />
-                </span>
+                </span> */}
                 <span onClick={() => setIsClick((prev) => !prev)}>
                   {user.email}
                 </span>
@@ -176,9 +174,35 @@ export default function AdminUserCard({ user }: { user: UserType }) {
                   placeholder="변경시에만 입력"
                 />
               </div>
-              <div className={styles.orderInfoTip}>
+              <div className={styles.orderInfoTip} style={{ color: "red" }}>
                 <p>비밀번호는 6자 이상 20자 이하로 설정해주세요.</p>
                 <p>비밀번호를 잘못 입력할 경우 사용자가 로그인 불가능합니다.</p>
+              </div>
+            </div>
+            <div className={styles.userInfoButton}>
+              {isClick && (
+                <div className={styles.isAdminButton}>
+                  <select
+                    value={isAdmin ? "어드민o" : "어드민x"}
+                    onChange={(e) => setIsAdmin(e.target.value === "어드민o")}
+                  >
+                    <option value="어드민o">어드민o</option>
+                    <option value="어드민x">어드민x</option>
+                  </select>
+                </div>
+              )}
+              <div className={styles.userInfoButtonBottom}>
+                <button
+                  onClick={() => {
+                    const check = confirm("정말로 삭제하시겠습니까?");
+                    if (check) deleteUserMutate.mutate();
+                  }}
+                >
+                  유저 삭제
+                </button>
+                <button onClick={() => updateUserMutate.mutate()}>
+                  유저 업데이트
+                </button>
               </div>
             </div>
             <div className={styles.orderList}>
@@ -209,30 +233,6 @@ export default function AdminUserCard({ user }: { user: UserType }) {
                   />
                 ))
               )}
-            </div>
-            <div className={styles.userInfoButton}>
-              {isClick && (
-                <div className={styles.isAdminButton}>
-                  <select
-                    value={isAdmin ? "어드민o" : "어드민x"}
-                    onChange={(e) => setIsAdmin(e.target.value === "어드민o")}
-                  >
-                    <option value="어드민o">어드민o</option>
-                    <option value="어드민x">어드민x</option>
-                  </select>
-                </div>
-              )}
-              <button
-                onClick={() => {
-                  const check = confirm("정말로 삭제하시겠습니까?");
-                  if (check) deleteUserMutate.mutate();
-                }}
-              >
-                유저 삭제
-              </button>
-              <button onClick={() => updateUserMutate.mutate()}>
-                유저 업데이트
-              </button>
             </div>
           </div>
         )}

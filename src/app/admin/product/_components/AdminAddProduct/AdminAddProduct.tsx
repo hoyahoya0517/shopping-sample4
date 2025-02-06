@@ -123,7 +123,9 @@ export default function AdminAddProduct() {
                   })}
               </select>
             </div>
-            <div className={styles.createdAt}>{createdAt}</div>
+            <div className={styles.createdAt}>
+              {dayjs(createdAt).format("YYYY.MM.DD HH:mm")}
+            </div>
             <div className={styles.price}>
               <input
                 value={price ? String(price) : ""}
@@ -167,10 +169,7 @@ export default function AdminAddProduct() {
               <div className={styles.addButton}>
                 <button onClick={handleImgButton}>이미지 추가</button>
               </div>
-              <div className={styles.listTip}>
-                <p>이미지 파일은 최소 2개 이상으로 설정해주세요.</p>
-              </div>
-              <div className={styles.imageList}>
+              <div className={styles.listMain}>
                 {img.map((image, index) => (
                   <ImageCard
                     key={`${image}${index}`}
@@ -179,15 +178,16 @@ export default function AdminAddProduct() {
                     setImg={setImg}
                   />
                 ))}
+                <div className={styles.listTip} style={{ color: "red" }}>
+                  <p>이미지 파일은 최소 2개 이상으로 설정해주세요.</p>
+                </div>
               </div>
+            </div>
+            <div className={styles.list}>
               <div className={styles.addButton}>
                 <button onClick={handleStockButton}>사이즈 추가</button>
               </div>
-              <div className={styles.listTip}>
-                <p>카테고리가 중복되지 않게 주의해 주세요.</p>
-                <p>단일 사이즈인 경우에도 free나 os로 설정</p>
-              </div>
-              <div className={styles.stockList}>
+              <div className={styles.listMain2}>
                 {stock.map((sizeStock, index) => (
                   <StockCard
                     key={`${sizeStock.size}${index}`}
@@ -196,6 +196,10 @@ export default function AdminAddProduct() {
                     setStock={setStock}
                   />
                 ))}
+                <div className={styles.listTip} style={{ color: "red" }}>
+                  <p>카테고리가 중복되지 않게 주의해 주세요.</p>
+                  <p>단일 사이즈인 경우에도 free나 os로 설정</p>
+                </div>
               </div>
             </div>
             <div className={styles.productCardButton}>

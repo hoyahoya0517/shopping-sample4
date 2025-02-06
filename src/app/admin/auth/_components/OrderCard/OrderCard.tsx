@@ -9,8 +9,7 @@ import {
   updateAdminUserOrder,
 } from "@/actions/admin";
 import OrderProductCard from "../OrderProductCard/OrderProductCard";
-import { BsChevronUp } from "react-icons/bs";
-import { mainColor } from "@/app/_config/ColorSetting";
+
 dayjs.locale("ko");
 
 export default function OrderCard({
@@ -133,7 +132,7 @@ export default function OrderCard({
                 key={index}
               />
             ))}
-          {isClick && (
+          {/* {isClick && (
             <div className={styles.productCardIsClick}>
               <span
                 className={styles.upIcon}
@@ -144,7 +143,7 @@ export default function OrderCard({
                 <BsChevronUp color={`${mainColor}`} size={20} />
               </span>
             </div>
-          )}
+          )} */}
         </div>
         <div className={isClick ? styles.orderInfoClick : styles.orderInfo}>
           <div className={styles.orderInfoTop}>
@@ -194,21 +193,27 @@ export default function OrderCard({
                     <div className={styles.cancelList}>
                       {cancels.map((cancel, index) => (
                         <div key={index}>
-                          <div className={styles.detailRow}>
+                          <div
+                            className={`${styles.detailRow} ${styles.detailRow2}`}
+                          >
                             <label>취소 금액</label>
                             <input
                               value={cancel.cancelAmount}
                               disabled={true}
                             />
                           </div>
-                          <div className={styles.detailRow}>
+                          <div
+                            className={`${styles.detailRow} ${styles.detailRow2}`}
+                          >
                             <label>취소 사유</label>
                             <input
                               value={cancel.cancelReason}
                               disabled={true}
                             />
                           </div>
-                          <div className={styles.detailRow}>
+                          <div
+                            className={`${styles.detailRow} ${styles.detailRow2}`}
+                          >
                             <label>취소 일자</label>
                             <input
                               value={dayjs(cancel.createdAt).format(

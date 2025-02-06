@@ -9,8 +9,6 @@ import {
   updateAdminUserOrder,
 } from "@/actions/admin";
 import OrderProductCard from "../OrderProductCard/OrderProductCard";
-import { BsChevronUp } from "react-icons/bs";
-import { mainColor } from "@/app/_config/ColorSetting";
 
 dayjs.locale("ko");
 
@@ -127,7 +125,7 @@ export default function OrderCard({ order }: { order: OrderType }) {
                 key={index}
               />
             ))}
-          {isClick && (
+          {/* {isClick && (
             <div className={styles.productCardIsClick}>
               <span
                 className={styles.upIcon}
@@ -138,7 +136,7 @@ export default function OrderCard({ order }: { order: OrderType }) {
                 <BsChevronUp color={`${mainColor}`} size={20} />
               </span>
             </div>
-          )}
+          )} */}
         </div>
         <div className={isClick ? styles.orderInfoClick : styles.orderInfo}>
           <div className={styles.orderInfoTop}>
@@ -282,41 +280,46 @@ export default function OrderCard({ order }: { order: OrderType }) {
                 </div>
               </div>
               <div className={styles.orderInfoTip}>
-                <p>송장번호는 택배회사와 송장번호를 같이 입력해주세요.</p>
-                <p>{"ex) cj대한통훈 1234567890"}</p>
+                <p style={{ color: "red" }}>
+                  송장번호는 택배회사와 송장번호를 같이 입력해주세요.
+                </p>
+                <p style={{ color: "red" }}>{"ex) cj대한통훈 1234567890"}</p>
               </div>
               <div className={styles.orderInfoButton}>
-                <button
-                  type="submit"
-                  onClick={() => {
-                    const tmpCancelAmount =
-                      prompt("결제 취소 금액을 입력해주세요.");
-                    if (tmpCancelAmount == null)
-                      return alert("결제 취소 금액을 입력해주세요.");
-                    if (isNaN(Number(tmpCancelAmount)))
-                      return alert("숫자를 입력해주세요.");
-                    if (Number(tmpCancelAmount) === 0)
-                      return alert("0원 이상 입력해주세요.");
-                    const tmpCancelReason = prompt("취소 사유를 입력해주세요.");
-                    if (!tmpCancelReason || tmpCancelReason == null)
-                      return alert("취소 사유를 입력해주세요.");
-                    cancelOrderMutate.mutate({
-                      cancelAmount: Number(tmpCancelAmount),
-                      cancelReason: tmpCancelReason,
-                    });
-                  }}
-                >
-                  결제 취소
-                </button>
-                <button
-                  type="submit"
-                  onClick={() => {
-                    const check = confirm("정말로 삭제하시겠습니까?");
-                    if (check) deleteOrderMutate.mutate();
-                  }}
-                >
-                  주문내역 삭제
-                </button>
+                <div className={styles.orderInfoButtonTop}>
+                  <button
+                    type="submit"
+                    onClick={() => {
+                      const tmpCancelAmount =
+                        prompt("결제 취소 금액을 입력해주세요.");
+                      if (tmpCancelAmount == null)
+                        return alert("결제 취소 금액을 입력해주세요.");
+                      if (isNaN(Number(tmpCancelAmount)))
+                        return alert("숫자를 입력해주세요.");
+                      if (Number(tmpCancelAmount) === 0)
+                        return alert("0원 이상 입력해주세요.");
+                      const tmpCancelReason =
+                        prompt("취소 사유를 입력해주세요.");
+                      if (!tmpCancelReason || tmpCancelReason == null)
+                        return alert("취소 사유를 입력해주세요.");
+                      cancelOrderMutate.mutate({
+                        cancelAmount: Number(tmpCancelAmount),
+                        cancelReason: tmpCancelReason,
+                      });
+                    }}
+                  >
+                    결제 취소
+                  </button>
+                  <button
+                    type="submit"
+                    onClick={() => {
+                      const check = confirm("정말로 삭제하시겠습니까?");
+                      if (check) deleteOrderMutate.mutate();
+                    }}
+                  >
+                    주문내역 삭제
+                  </button>
+                </div>
                 <button
                   onClick={() => {
                     updateOrderMutate.mutate();

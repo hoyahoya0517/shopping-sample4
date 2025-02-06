@@ -1,6 +1,7 @@
 .inputCard {
   width: 100%;
   display: flex;
+  gap: 0.5rem;
 }
 .inputCartInput {
   flex: 1;
@@ -8,22 +9,76 @@
 }
 .inputCartInput input {
   width: 100%;
-  height: 100%;
+  height: 50px;
+  padding: 12px;
+  border: 1px solid var(--gray-color);
+  border-radius: 6px;
+}
+.inputCartInput input:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
 }
 .inputCardButton {
-  flex-basis: 10%;
+  flex-basis: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .inputCardButton button {
+  width: 100%;
+  height: 50px;
   border: none;
-  background-color: transparent;
+  background: white;
+  color: black;
   padding: 5px;
   cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.inputCardButton button:hover:not(:disabled) {
+  background-color: var(--gray-color);
+}
+.inputCardButton button:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
+}
+.inputCardButton2 {
+  flex-basis: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.inputCardButton2 button {
+  width: 100%;
+  height: 50px;
+  border: none;
+  background: white;
+  color: black;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.inputCardButton2 button:hover:not(:disabled) {
+  background-color: var(--gray-color);
+}
+.inputCardButton2 button:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
 }
 @media (max-width: 768px) {
   .inputCardButton {
-    flex-basis: 15%;
+    flex-basis: 50px;
+  }
+  .inputCardButton2 {
+    flex-basis: 30px;
   }
 }

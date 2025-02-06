@@ -1,4 +1,4 @@
-.productCard {
+.returnDetail {
   width: 100%;
   display: flex;
   margin-top: 1.5rem;
@@ -30,13 +30,7 @@
   object-fit: cover;
   aspect-ratio: 200/300;
 }
-.sales {
-  flex-basis: 15%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.productDetail {
+.detail {
   flex: 1;
   text-align: left;
   margin-right: 24px;
@@ -44,13 +38,10 @@
   flex-direction: column;
 }
 @media (max-width: 768px) {
-  .productCard {
+  .returnDetail {
     margin-top: 1rem;
   }
   .index {
-    flex-basis: 20%;
-  }
-  .sales {
     flex-basis: 20%;
   }
 }

@@ -1,19 +1,16 @@
-.auth {
+.adminOrder {
   width: 100%;
-  min-height: 100svh;
-  padding: 96px 0;
   display: flex;
   flex-direction: column;
 }
-.main {
-  padding: 0 5%;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+.isUpdate {
+  border: 5px solid yellow;
+  border-radius: 12px;
 }
 .searchBar {
   border-radius: 12px;
   padding: 1rem;
+  margin: 30px 0;
   display: flex;
   flex-direction: row;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -31,7 +28,6 @@
   width: 100%;
   height: 100%;
   border: none;
-  padding: 12px;
 }
 .searchInput > input:focus {
   outline: none;
@@ -48,7 +44,30 @@
   background-color: transparent;
   padding: 5px;
 }
-.authMain {
+.addProductButton {
+  width: 100%;
+  margin-bottom: 30px;
+  display: flex;
+  gap: 12px;
+}
+.addProductButton > button {
+  flex: 1;
+  cursor: pointer;
+  height: 50px;
+  border: none;
+  background: white;
+  color: black;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.addProductButton button:hover {
+  background-color: var(--gray-color);
+}
+.main {
   display: flex;
   flex-direction: column;
   border-radius: 12px;
@@ -59,15 +78,28 @@
   display: flex;
   border-bottom: 1px solid var(--gray-color);
 }
-
-.topUser {
+.topName {
   flex: 1;
-  padding: 1rem;
+  gap: 0.5rem;
+  padding: 5px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+.topName > span {
+  cursor: pointer;
 }
 
+.topCategory {
+  flex-basis: 20%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
 .topMenu {
   flex-basis: 20%;
   text-align: center;
@@ -76,17 +108,22 @@
   align-items: center;
   gap: 0.5rem;
   padding: 1rem;
-  flex-direction: column;
 }
-
 .topMenu > span {
   cursor: pointer;
 }
-
 .selected {
   color: red;
 }
-
+.topOrder {
+  flex-basis: 100px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 1rem;
+}
 .page {
   display: flex;
   justify-content: center;
@@ -103,40 +140,44 @@
   cursor: pointer;
 }
 
-.arrow {
-  display: flex;
-  align-items: center;
-}
 @media (max-width: 1024px) {
+  .topName {
+    flex-direction: column;
+  }
   .topMenu {
+    flex-direction: column;
+  }
+  .topCategory {
     flex-direction: column;
   }
 }
 
 @media (max-width: 768px) {
-  .main {
-    padding: 0 20px;
-  }
-  .searchBar {
-    padding: 0.5rem;
-  }
   .searchSelect {
     flex-basis: 20%;
   }
   .searchButton {
     flex-basis: 20%;
   }
+  .topPrice {
+    display: none;
+  }
   .topMenu {
     flex: 1;
+    flex-direction: column;
+    padding: 0.5rem;
   }
   .topOrder {
+    padding: 0.5rem;
+  }
+  .topCreatedAt {
     display: none;
   }
-  .topAdmin {
-    display: none;
-  }
-  .topMenuFinish {
+  .topCategory {
     flex: 1;
+    flex-direction: column;
+    padding: 0.5rem;
+    /* border-left: none; */
   }
   .page {
     margin: 24px 20px;

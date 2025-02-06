@@ -108,7 +108,7 @@ export default function Account() {
       userAgent.indexOf("iphone") > -1 ||
       (userAgent.indexOf("ipad") > -1 && "ontouchend" in document);
     if (addressModal) {
-      if (window.innerWidth <= 767) {
+      if (window.innerWidth <= 768) {
         if (isIos) {
           const tmpScrollY = window.scrollY;
           setScrollY(tmpScrollY);
@@ -329,14 +329,14 @@ export default function Account() {
             style={{
               width: `${
                 width !== undefined
-                  ? width > 767
+                  ? width > 768
                     ? "496px"
                     : "100vw"
                   : "496px"
               }`,
               height: `${
                 width !== undefined
-                  ? width > 767
+                  ? width > 768
                     ? "444px"
                     : "100svh"
                   : "444px"
@@ -345,7 +345,7 @@ export default function Account() {
             onComplete={handleAddressComplete}
           />
           <BsX
-            size={width !== undefined ? (width > 767 ? "24" : "28") : "24"}
+            size={width !== undefined ? (width > 768 ? "24" : "28") : "24"}
             color={`${mainColor}`}
             onClick={() => {
               setAddressModal(false);

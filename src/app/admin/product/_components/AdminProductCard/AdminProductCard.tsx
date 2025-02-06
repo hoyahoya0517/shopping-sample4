@@ -14,7 +14,6 @@ import {
 } from "@/actions/admin";
 import { getCategory } from "@/actions/category";
 import { BsChevronUp } from "react-icons/bs";
-import { mainColor } from "@/app/_config/ColorSetting";
 
 dayjs.locale("ko");
 
@@ -144,7 +143,7 @@ export default function AdminProductCard({
                     setIsClick(false);
                   }}
                 >
-                  <BsChevronUp color={`${mainColor}`} size={20} />
+                  <BsChevronUp color={`black`} size={20} />
                 </span>
                 <input
                   value={name}
@@ -240,10 +239,7 @@ export default function AdminProductCard({
                 <div className={styles.addButton}>
                   <button onClick={handleImgButton}>이미지 추가</button>
                 </div>
-                <div className={styles.listTip}>
-                  <p>이미지 파일은 최소 2개 이상으로 설정해주세요.</p>
-                </div>
-                <div className={styles.imageList}>
+                <div className={styles.listMain}>
                   {img.map((image, index) => (
                     <ImageCard
                       key={`${image}${index}`}
@@ -252,24 +248,29 @@ export default function AdminProductCard({
                       setImg={setImg}
                     />
                   ))}
+                  <div className={styles.listTip} style={{ color: "red" }}>
+                    <p>이미지 파일은 최소 2개 이상으로 설정해주세요.</p>
+                  </div>
                 </div>
+              </div>
+              <div className={styles.list}>
                 <div className={styles.addButton}>
                   <button onClick={handleStockButton}>사이즈 추가</button>
                 </div>
-                <div className={styles.listTip}>
-                  <p>카테고리가 중복되지 않게 주의해 주세요.</p>
-                  <p>단일 사이즈인 경우에도 free나 os로 설정</p>
+                <div className={styles.listMain2}>
+                  {stock.map((sizeStock, index) => (
+                    <StockCard
+                      key={`${sizeStock.size}${index}`}
+                      index={index}
+                      stock={stock}
+                      setStock={setStock}
+                    />
+                  ))}
+                  <div className={styles.listTip} style={{ color: "red" }}>
+                    <p>카테고리가 중복되지 않게 주의해 주세요.</p>
+                    <p>단일 사이즈인 경우에도 free나 os로 설정</p>
+                  </div>
                 </div>
-              </div>
-              <div className={styles.stockList}>
-                {stock.map((sizeStock, index) => (
-                  <StockCard
-                    key={`${sizeStock.size}${index}`}
-                    index={index}
-                    stock={stock}
-                    setStock={setStock}
-                  />
-                ))}
               </div>
               <div className={styles.productCardButton}>
                 <div className={styles.buttonMain}>

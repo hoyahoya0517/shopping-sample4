@@ -1,34 +1,65 @@
 .stockCard {
-  height: 45px;
-  min-height: 45px;
+  height: 50px;
+  min-height: 50px;
   display: flex;
   align-items: center;
-  padding: 5px;
+  gap: 0.5rem;
 }
 .size {
   flex-basis: 40%;
 }
 .size input {
   width: 100%;
+  height: 50px;
+  padding: 12px;
+  border: 1px solid var(--gray-color);
+  border-radius: 6px;
+}
+.size input:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
 }
 .qty {
   flex-basis: 40%;
 }
 .qty input {
   width: 100%;
+  height: 50px;
+  padding: 12px;
+  border: 1px solid var(--gray-color);
+  border-radius: 6px;
+}
+.qty input:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
 }
 .stockCard button {
   width: 100%;
+  height: 50px;
   border: none;
-  background-color: transparent;
+  background: white;
+  color: black;
   padding: 5px;
   cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.stockCard button:hover:not(:disabled) {
+  background-color: var(--gray-color);
+}
+.stockCard button:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
 }
 .updateButton {
-  flex-basis: 10%;
+  flex-basis: calc((100% - 90px) / 10);
 }
 .delete {
-  flex-basis: 10%;
+  flex-basis: calc((100% - 90px) / 10);
 }
 @media (max-width: 768px) {
   .updateButton {

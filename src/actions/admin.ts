@@ -1,8 +1,28 @@
 "use server";
 
 import { auth } from "@/auth";
-import { Stock } from "@/type/type";
+import { ProductType, Stock } from "@/type/type";
 import { cookies } from "next/headers";
+
+export async function getAdminAllProducts() {
+  const session = await auth();
+  if (!session) return null;
+  const cookie = await cookies();
+  const token = cookie.get("token");
+  const res = await fetch(`${process.env.SERVER_URL}/admin/products/all`, {
+    headers: { Authorization: `Bearer ${token?.value}` },
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    const errorMessage = await res.json();
+    class CustomError extends Error {
+      digest = errorMessage.message;
+    }
+    throw new CustomError();
+  }
+  const products = await res.json();
+  return products;
+}
 
 export async function getAdminProducts(category: string, options: string) {
   const session = await auth();
@@ -151,6 +171,34 @@ export async function deleteAdminProduct(productId: string) {
         Authorization: `Bearer ${token?.value}`,
       },
       method: "DELETE",
+      cache: "no-store",
+    }
+  );
+  if (!res.ok) {
+    const errorMessage = await res.json();
+    class CustomError extends Error {
+      digest = errorMessage.message;
+    }
+    throw new CustomError();
+  }
+}
+
+export async function updateAdminProductOrder(newProduct: ProductType[]) {
+  const session = await auth();
+  if (!session) return null;
+  const cookie = await cookies();
+  const token = cookie.get("token");
+  const res = await fetch(
+    `${process.env.SERVER_URL}/admin/product/order/update`,
+    {
+      headers: {
+        Authorization: `Bearer ${token?.value}`,
+        "Content-Type": "application/json",
+      },
+      method: "PUT",
+      body: JSON.stringify({
+        newProduct,
+      }),
       cache: "no-store",
     }
   );

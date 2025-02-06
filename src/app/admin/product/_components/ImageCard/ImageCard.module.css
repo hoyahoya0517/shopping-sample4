@@ -3,7 +3,6 @@
   min-height: 110px;
   display: flex;
   align-items: center;
-  padding: 5px;
 }
 .image {
   width: 66px;
@@ -17,28 +16,63 @@
   object-fit: cover;
   aspect-ratio: 200/300;
 }
+.buttonInput {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
 .url {
   flex: 1;
 }
 .url input {
   width: 100%;
+  height: 50px;
+  padding: 12px;
+  border: 1px solid var(--gray-color);
+  border-radius: 6px;
+}
+.url input:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
 }
 .imageCard button {
   width: 100%;
+  height: 50px;
   border: none;
-  background-color: transparent;
+  background: white;
+  color: black;
   padding: 5px;
   cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.imageCard button:hover:not(:disabled) {
+  background-color: var(--gray-color);
+}
+.imageCard button:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
 }
 .updateButton {
   flex-basis: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .delete {
   flex-basis: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 @media (max-width: 768px) {
   .image {
-    margin-right: 0;
+    margin-right: 0.5rem;
   }
   .updateButton {
     flex-basis: 15%;

@@ -41,7 +41,7 @@ export default function OrderCard({ product }: { product: CartProductType }) {
         <div className={styles.qtyAndRemove}>
           <span>
             {width !== undefined
-              ? width > 767
+              ? width > 768
                 ? product.cartStock.stock.qty
                 : `수량: ${product.cartStock.stock.qty}`
               : product.cartStock.stock.qty}

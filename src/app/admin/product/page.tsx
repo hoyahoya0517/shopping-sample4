@@ -13,6 +13,7 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { getCategory } from "@/actions/category";
 import { mainColor } from "@/app/_config/ColorSetting";
 import Loading from "@/app/_components/Loading/Loading";
+import AdminOrder from "./_components/AdminOrder/AdminOrder";
 
 interface ProductResponse {
   products: ProductType[];
@@ -21,12 +22,13 @@ interface ProductResponse {
 
 export default function Product() {
   const router = useRouter();
+  const [isOrder, setIsOrder] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPage, setMaxPage] = useState(0);
   const [search, setSearch] = useState("");
   const [searchFilter, setSearchFilter] = useState("name");
-  const [filter, setFilter] = useState("createdAt");
-  const [options, setOptions] = useState("?createdAt=-1&page=1");
+  const [filter, setFilter] = useState("");
+  const [options, setOptions] = useState("?page=1");
   const [nameFilter, setNameFilter] = useState("오름차순");
   const [createdAtFilter, setCreatedAtFilter] = useState("최신순");
   const [categoryFilter, setCategoryFilter] = useState("all");
@@ -143,19 +145,44 @@ export default function Product() {
         <div className={styles.addProductButton}>
           {isAdd ? (
             <button
+              disabled={isOrder}
               onClick={() => {
+                if (isOrder) return;
                 setIsAdd(false);
               }}
             >
-              취소하기
+              상품 추가 취소
             </button>
           ) : (
             <button
+              disabled={isOrder}
               onClick={() => {
+                if (isOrder) return;
                 setIsAdd(true);
               }}
             >
               상품 추가하기
+            </button>
+          )}
+          {isOrder ? (
+            <button
+              disabled={isAdd}
+              onClick={() => {
+                if (isAdd) return;
+                setIsOrder(false);
+              }}
+            >
+              상품 순서변경 취소
+            </button>
+          ) : (
+            <button
+              disabled={isAdd}
+              onClick={() => {
+                if (isAdd) return;
+                setIsOrder(true);
+              }}
+            >
+              상품 순서변경
             </button>
           )}
         </div>
@@ -164,138 +191,152 @@ export default function Product() {
             <AdminAddProduct />
           </div>
         )}
-        <div className={styles.top}>
-          <div
-            className={`${styles.topName} ${
-              filter === "name" ? `${styles.selected}` : ""
-            }`}
-          >
-            <span
-              onClick={() => {
-                setFilter("name");
-              }}
-            >
-              상품명
-            </span>
-            <select
-              value={nameFilter}
-              onChange={(e) => {
-                setNameFilter(e.target.value);
-              }}
-            >
-              <option value={"오름차순"}>오름차순</option>
-              <option value={"내림차순"}>내림차순</option>
-            </select>
-          </div>
-          <div className={styles.topCategory}>
-            <span>카테고리</span>
-            <select
-              value={categoryFilter}
-              onChange={(e) => {
-                setCategoryFilter(e.target.value);
-              }}
-            >
-              <option value={"all"}>all</option>
-              {categoryData?.category.map((category) => (
-                <option value={category} key={category}>
-                  {category}
-                </option>
+        {isOrder ? (
+          <AdminOrder />
+        ) : (
+          <div className={styles.productMain}>
+            <div className={styles.top}>
+              <div
+                className={`${styles.topName} ${
+                  filter === "name" ? `${styles.selected}` : ""
+                }`}
+              >
+                <span
+                  onClick={() => {
+                    if (filter === "name") return setFilter("");
+                    setFilter("name");
+                  }}
+                >
+                  상품명
+                </span>
+                <select
+                  value={nameFilter}
+                  onChange={(e) => {
+                    setNameFilter(e.target.value);
+                  }}
+                >
+                  <option value={"오름차순"}>오름차순</option>
+                  <option value={"내림차순"}>내림차순</option>
+                </select>
+              </div>
+              <div className={styles.topCategory}>
+                <span>카테고리</span>
+                <select
+                  value={categoryFilter}
+                  onChange={(e) => {
+                    setCategoryFilter(e.target.value);
+                  }}
+                >
+                  <option value={"all"}>all</option>
+                  {categoryData?.category.map((category) => (
+                    <option value={category} key={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div
+                className={`${styles.topMenu} ${
+                  filter === "createdAt" ? `${styles.selected}` : ""
+                }`}
+              >
+                <span
+                  onClick={() => {
+                    if (filter === "createdAt") return setFilter("");
+                    setFilter("createdAt");
+                  }}
+                >
+                  등록일
+                </span>
+                <select
+                  value={createdAtFilter}
+                  onChange={(e) => {
+                    setCreatedAtFilter(e.target.value);
+                  }}
+                >
+                  <option value={"최신순"}>최신순</option>
+                  <option value={"오래된순"}>오래된순</option>
+                </select>
+              </div>
+              <div
+                className={`${styles.topMenu} ${styles.topPrice} ${
+                  filter === "price" ? `${styles.selected}` : ""
+                }`}
+              >
+                <span
+                  onClick={() => {
+                    if (filter === "price") return setFilter("");
+                    setFilter("price");
+                  }}
+                >
+                  가격
+                </span>
+                <select
+                  value={priceFilter}
+                  onChange={(e) => {
+                    setPriceFilter(e.target.value);
+                  }}
+                >
+                  <option value={"높은 가격 순"}>높은 가격 순</option>
+                  <option value={"낮은 가격 순"}>낮은 가격 순</option>
+                </select>
+              </div>
+            </div>
+            <div className={styles.center}>
+              {productsResponse?.products.map((product) => (
+                <AdminProductCard key={product.id} product={product} />
               ))}
-            </select>
+            </div>
+            {!isOrder && (
+              <div className={styles.page}>
+                {currentPage > 10 && (
+                  <span
+                    className={styles.arrow}
+                    onClick={() => {
+                      const prevFirstPage =
+                        Math.floor((currentPage - 1) / 10) * 10 - 9;
+                      setCurrentPage(prevFirstPage);
+                    }}
+                  >
+                    <AiOutlineLeft size={12} color={`${mainColor}`} />
+                  </span>
+                )}
+                {Array.from(
+                  {
+                    length: Math.min(
+                      10,
+                      maxPage - Math.floor((currentPage - 1) / 10) * 10
+                    ),
+                  },
+                  (v, i) => Math.floor((currentPage - 1) / 10) * 10 + i + 1
+                ).map((page) => (
+                  <span
+                    className={
+                      page === currentPage ? `${styles.selectPage}` : ``
+                    }
+                    key={page}
+                    onClick={() => {
+                      setCurrentPage(page);
+                    }}
+                  >
+                    {page}
+                  </span>
+                ))}
+                {Math.floor((currentPage - 1) / 10) * 10 + 10 < maxPage && (
+                  <span
+                    className={styles.arrow}
+                    onClick={() => {
+                      const nextFirstPage =
+                        Math.floor((currentPage - 1) / 10) * 10 + 11;
+                      setCurrentPage(nextFirstPage);
+                    }}
+                  >
+                    <AiOutlineRight size={12} color={`${mainColor}`} />
+                  </span>
+                )}
+              </div>
+            )}
           </div>
-          <div
-            className={`${styles.topMenu} ${
-              filter === "createdAt" ? `${styles.selected}` : ""
-            }`}
-          >
-            <span
-              onClick={() => {
-                setFilter("createdAt");
-              }}
-            >
-              등록일
-            </span>
-            <select
-              value={createdAtFilter}
-              onChange={(e) => {
-                setCreatedAtFilter(e.target.value);
-              }}
-            >
-              <option value={"최신순"}>최신순</option>
-              <option value={"오래된순"}>오래된순</option>
-            </select>
-          </div>
-          <div
-            className={`${styles.topMenu} ${styles.topPrice} ${
-              filter === "price" ? `${styles.selected}` : ""
-            }`}
-          >
-            <span
-              onClick={() => {
-                setFilter("price");
-              }}
-            >
-              가격
-            </span>
-            <select
-              value={priceFilter}
-              onChange={(e) => {
-                setPriceFilter(e.target.value);
-              }}
-            >
-              <option value={"높은 가격 순"}>높은 가격 순</option>
-              <option value={"낮은 가격 순"}>낮은 가격 순</option>
-            </select>
-          </div>
-        </div>
-        <div className={styles.center}>
-          {productsResponse?.products.map((product) => (
-            <AdminProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </div>
-      <div className={styles.page}>
-        {currentPage > 10 && (
-          <span
-            className={styles.arrow}
-            onClick={() => {
-              const prevFirstPage = Math.floor((currentPage - 1) / 10) * 10 - 9;
-              setCurrentPage(prevFirstPage);
-            }}
-          >
-            <AiOutlineLeft size={12} color={`${mainColor}`} />
-          </span>
-        )}
-        {Array.from(
-          {
-            length: Math.min(
-              10,
-              maxPage - Math.floor((currentPage - 1) / 10) * 10
-            ),
-          },
-          (v, i) => Math.floor((currentPage - 1) / 10) * 10 + i + 1
-        ).map((page) => (
-          <span
-            className={page === currentPage ? `${styles.selectPage}` : ``}
-            key={page}
-            onClick={() => {
-              setCurrentPage(page);
-            }}
-          >
-            {page}
-          </span>
-        ))}
-        {Math.floor((currentPage - 1) / 10) * 10 + 10 < maxPage && (
-          <span
-            className={styles.arrow}
-            onClick={() => {
-              const nextFirstPage =
-                Math.floor((currentPage - 1) / 10) * 10 + 11;
-              setCurrentPage(nextFirstPage);
-            }}
-          >
-            <AiOutlineRight size={12} color={`${mainColor}`} />
-          </span>
         )}
       </div>
     </div>

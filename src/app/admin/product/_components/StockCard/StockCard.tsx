@@ -56,7 +56,7 @@ export default function StockCard({
               setIsUpdate(false);
             }}
           >
-            확인
+            저장
           </button>
         ) : (
           <button

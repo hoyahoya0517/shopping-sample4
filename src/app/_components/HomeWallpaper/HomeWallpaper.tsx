@@ -37,7 +37,7 @@ export default function HomeWallpaper({
       {width && (
         <motion.div
           initial={{
-            transform: `translate(-50%, -50%) scale(${width > 767 ? 3.5 : 2})`,
+            transform: `translate(-50%, -50%) scale(${width > 768 ? 3.5 : 2})`,
           }}
           animate={{ transform: "translate(-50%, -50%) scale(0)" }}
           transition={{ duration: 5, ease: "easeIn", delay: 0.3 }}
@@ -51,7 +51,7 @@ export default function HomeWallpaper({
   // return (
   //   <>
   //     {width !== undefined ? (
-  //       width > 767 ? (
+  //       width > 768 ? (
   //         <img className={styles.img} src={homeWallpaper.pc} />
   //       ) : (
   //         <img className={styles.img} src={homeWallpaper.mobile} />

@@ -102,7 +102,7 @@ export default function CartCard({ product }: { product: CartProductType }) {
               </button>
             </div>
             {width !== undefined ? (
-              width > 767 ? (
+              width > 768 ? (
                 <div className={styles.remove}>
                   <span onClick={handleRemoveClick}>remove</span>
                 </div>

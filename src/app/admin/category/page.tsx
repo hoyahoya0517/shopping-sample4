@@ -44,37 +44,42 @@ export default function Category() {
   return (
     <div className={styles.category}>
       <div className={`${styles.main} ${isUpdate ? styles.isUpdate : ""}`}>
-        <p>카테고리</p>
-        {category &&
-          category.map((cate, index) => (
-            <InputCard
-              key={`${cate}${index}`}
-              index={index}
-              category={category}
-              setCategory={setCategory}
-            />
-          ))}
-        <div className={styles.tip}>
-          <span>카테고리가 중복되지 않게 주의해 주세요.</span>
-          <span>new, x 카테고리는 삭제되지 않습니다.</span>
-        </div>
-        <div className={styles.button}>
-          <button
-            onClick={() => {
-              const tmpCategory = category?.length > 0 ? category.slice() : [];
-              tmpCategory.push("new category");
-              setCategory(tmpCategory);
-            }}
-          >
-            카테고리 추가
-          </button>
-          <button
-            onClick={() => {
-              updateMutate.mutate();
-            }}
-          >
-            카테고리 변경
-          </button>
+        <div className={styles.mainList}>
+          <p>카테고리</p>
+          <div className={styles.categoryList}>
+            {category &&
+              category.map((cate, index) => (
+                <InputCard
+                  key={`${cate}${index}`}
+                  index={index}
+                  category={category}
+                  setCategory={setCategory}
+                />
+              ))}
+          </div>
+          <div className={styles.tip}>
+            <span>카테고리가 중복되지 않게 주의해 주세요.</span>
+            <span>new, x 카테고리는 삭제되지 않습니다.</span>
+          </div>
+          <div className={styles.button}>
+            <button
+              onClick={() => {
+                const tmpCategory =
+                  category?.length > 0 ? category.slice() : [];
+                tmpCategory.push("new category");
+                setCategory(tmpCategory);
+              }}
+            >
+              카테고리 추가
+            </button>
+            <button
+              onClick={() => {
+                updateMutate.mutate();
+              }}
+            >
+              카테고리 변경
+            </button>
+          </div>
         </div>
       </div>
     </div>

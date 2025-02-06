@@ -29,6 +29,8 @@ body {
   --gray-color: #cacbdc;
   --graygray-color: rgba(18, 17, 16, 0.6);
   --message-font-color: #41a1e6;
+  --disabled-color: #e2e8f0;
+  --cursor-color: #f8fafc;
 }
 input,
 button {
@@ -50,17 +52,28 @@ a {
   text-decoration: none;
 }
 select {
-  border: 1px solid var(--main-color);
-  color: var(--font-color);
-  text-align: center;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--gray-color);
+  border-radius: 4px;
+  background-color: white;
+  font-size: 0.7rem;
+  color: black;
+  cursor: pointer;
   appearance: none;
-  padding: 5px;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  background-size: 16px;
+  transition: all 0.2s ease;
   background-color: transparent;
+  text-align: center;
 }
-searchBar > select:focus {
-  outline: none;
+@media (max-width: 768px) {
+  select {
+    padding: 6px;
+    background-image: none;
+  }
 }
 img {
   -webkit-user-drag: none;
@@ -75,7 +88,6 @@ img {
   width: 100%;
   max-width: 100%;
   background: white;
-  border: 1px solid var(--main-color);
   font-family: "Arial", "Helvetica", sans-serif;
   line-height: 1.125em;
 }
@@ -214,13 +226,13 @@ img {
 }
 
 .react-calendar__tile--active {
-  background: var(--main-color);
+  background: var(--gray-color);
   color: white;
 }
 
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
-  background: var(--main-color);
+  background: var(--gray-color);
 }
 
 .react-calendar--selectRange .react-calendar__tile--hover {

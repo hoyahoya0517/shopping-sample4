@@ -3,7 +3,7 @@
   min-height: 110px;
   display: flex;
   align-items: center;
-  padding: 5px;
+  padding: 0.5rem;
 }
 .orderDetailInfo {
   flex: 1;

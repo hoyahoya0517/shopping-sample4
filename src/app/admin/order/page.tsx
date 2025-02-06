@@ -4,7 +4,7 @@ import { FormEvent, useEffect, useState } from "react";
 import styles from "./page.module.css";
 import { useQuery } from "@tanstack/react-query";
 import { OrderType, UserType } from "@/type/type";
-import { getAdminOrder } from "@/actions/admin";
+import { getAdminAllOrder, getAdminOrder } from "@/actions/admin";
 import OrderCard from "./_components/OrderCard/OrderCard";
 import { useRouter } from "next/navigation";
 import { getUserInfo } from "@/actions/auth";
@@ -29,6 +29,12 @@ export default function Order() {
   const [createdAtFilter, setCreatedAtFilter] = useState("최신순");
   const [amountFilter, setAmountFilter] = useState("높은 가격 순");
   const [userIsAdmin, setUserIsAdmin] = useState<boolean>(false);
+  const [setOrderChecking, setOrderCheckingsetOrderChecking] =
+    useState<number>(0);
+  const [shipmentPreparing, setShipmentPreparing] = useState<number>(0);
+  const [shipmentComplete, setShipmentComplete] = useState<number>(0);
+  const [returnOrdering, setReturnOrdering] = useState<number>(0);
+  const [returnComplete, setReturnComplete] = useState<number>(0);
   const {
     data: userInfo,
     isLoading,
@@ -41,6 +47,37 @@ export default function Order() {
     queryKey: ["admin", "order", options],
     queryFn: () => getAdminOrder(options),
   });
+  const { data: orders } = useQuery<OrderType[]>({
+    queryKey: ["admin", "order", "orders"],
+    queryFn: () => getAdminAllOrder(),
+  });
+  useEffect(() => {
+    if (!orders) return;
+    setOrderCheckingsetOrderChecking(0);
+    setShipmentPreparing(0);
+    setShipmentComplete(0);
+    setReturnOrdering(0);
+    setReturnComplete(0);
+    orders.forEach((order) => {
+      switch (order.orderStatus) {
+        case "주문 확인 중":
+          setOrderCheckingsetOrderChecking((prev) => prev + 1);
+          break;
+        case "발송 준비 중":
+          setShipmentPreparing((prev) => prev + 1);
+          break;
+        case "발송 완료":
+          setShipmentComplete((prev) => prev + 1);
+          break;
+        case "반품 진행 중":
+          setReturnOrdering((prev) => prev + 1);
+          break;
+        case "반품 완료":
+          setReturnComplete((prev) => prev + 1);
+          break;
+      }
+    });
+  }, [orders]);
   useEffect(() => {
     const searchParams = new URLSearchParams();
     if (search) {
@@ -100,6 +137,95 @@ export default function Order() {
   return (
     <div className={styles.order}>
       <div className={styles.main}>
+        <div className={styles.orderMenu}>
+          <div className={styles.orderMenuDetail}>
+            <span
+              onClick={() => {
+                setOrderStatusFilter("주문 확인 중");
+              }}
+              style={{ color: "#e53e3e" }}
+              className={styles.orderFont}
+            >
+              {setOrderChecking}
+            </span>
+            <span
+              onClick={() => {
+                setOrderStatusFilter("주문 확인 중");
+              }}
+              style={{ color: "#e53e3e" }}
+            >
+              주문 확인 중
+            </span>
+          </div>
+          <div className={styles.orderMenuDetail}>
+            <span
+              onClick={() => {
+                setOrderStatusFilter("발송 준비 중");
+              }}
+              className={styles.orderFont}
+            >
+              {shipmentPreparing}
+            </span>
+            <span
+              onClick={() => {
+                setOrderStatusFilter("발송 준비 중");
+              }}
+            >
+              발송 준비 중
+            </span>
+          </div>
+          <div className={styles.orderMenuDetail}>
+            <span
+              onClick={() => {
+                setOrderStatusFilter("발송 완료");
+              }}
+              className={styles.orderFont}
+            >
+              {shipmentComplete}
+            </span>
+            <span
+              onClick={() => {
+                setOrderStatusFilter("발송 완료");
+              }}
+            >
+              발송 완료
+            </span>
+          </div>
+          <div className={styles.orderMenuDetail}>
+            <span
+              onClick={() => {
+                setOrderStatusFilter("반품 진행 중");
+              }}
+              className={styles.orderFont}
+            >
+              {returnOrdering}
+            </span>
+            <span
+              onClick={() => {
+                setOrderStatusFilter("반품 진행 중");
+              }}
+            >
+              반품 진행 중
+            </span>
+          </div>
+          <div className={styles.orderMenuDetail}>
+            <span
+              onClick={() => {
+                setOrderStatusFilter("반품 완료");
+              }}
+              className={styles.orderFont}
+            >
+              {returnComplete}
+            </span>
+            <span
+              onClick={() => {
+                setOrderStatusFilter("반품 완료");
+              }}
+            >
+              반품 완료
+            </span>
+          </div>
+        </div>
         <form className={styles.searchBar} onSubmit={handleSearch}>
           <div className={styles.searchSelect}>
             <select
@@ -127,121 +253,124 @@ export default function Order() {
             <button>검색</button>
           </div>
         </form>
-        <div className={styles.top}>
-          <div className={styles.topOrder}>
-            <span>주문상품</span>
+        <div className={styles.orderMain}>
+          <div className={styles.top}>
+            <div className={styles.topOrder}>
+              <span>주문상품</span>
+            </div>
+            <div className={styles.topOrderStatus}>
+              <span>주문 상태</span>
+              <select
+                value={orderStatusFilter}
+                onChange={(e) => {
+                  setOrderStatusFilter(e.target.value);
+                }}
+              >
+                <option value={"전체"}>전체</option>
+                <option value={"주문 확인 중"}>주문 확인 중</option>
+                <option value={"발송 준비 중"}>발송 준비 중</option>
+                <option value={"발송 완료"}>발송 완료</option>
+                <option value={"반품 진행 중"}>반품 진행 중</option>
+                <option value={"반품 완료"}>반품 완료</option>
+              </select>
+            </div>
+            <div
+              className={`${styles.topMenu} ${
+                filter === "createdAt" ? `${styles.selected}` : ""
+              }`}
+            >
+              <span
+                onClick={() => {
+                  setFilter("createdAt");
+                }}
+              >
+                주문 일자
+              </span>
+              <select
+                value={createdAtFilter}
+                onChange={(e) => {
+                  setCreatedAtFilter(e.target.value);
+                }}
+              >
+                <option value={"최신순"}>최신순</option>
+                <option value={"오래된순"}>오래된순</option>
+              </select>
+            </div>
+            <div
+              className={`${styles.topMenu} ${
+                filter === "amount" ? `${styles.selected}` : ""
+              }`}
+            >
+              <span
+                onClick={() => {
+                  setFilter("amount");
+                }}
+              >
+                구매가격
+              </span>
+              <select
+                value={amountFilter}
+                onChange={(e) => {
+                  setAmountFilter(e.target.value);
+                }}
+              >
+                <option value={"높은 가격 순"}>높은 가격 순</option>
+                <option value={"낮은 가격 순"}>낮은 가격 순</option>
+              </select>
+            </div>
           </div>
-          <div className={styles.topOrderStatus}>
-            <span>주문 상태</span>
-            <select
-              value={orderStatusFilter}
-              onChange={(e) => {
-                setOrderStatusFilter(e.target.value);
-              }}
-            >
-              <option value={"전체"}>전체</option>
-              <option value={"주문 확인 중"}>주문 확인 중</option>
-              <option value={"발송 준비 중"}>발송 준비 중</option>
-              <option value={"발송 완료"}>발송 완료</option>
-              <option value={"반품 진행 중"}>반품 진행 중</option>
-              <option value={"반품 완료"}>반품 완료</option>
-            </select>
+          {/* todo key변경하기 */}
+          <div className={styles.center}>
+            {ordersResponse?.orders.map((order) => (
+              <OrderCard key={order.orderId} order={order} />
+            ))}
           </div>
-          <div
-            className={`${styles.topMenu} ${
-              filter === "createdAt" ? `${styles.selected}` : ""
-            }`}
-          >
-            <span
-              onClick={() => {
-                setFilter("createdAt");
-              }}
-            >
-              주문 일자
-            </span>
-            <select
-              value={createdAtFilter}
-              onChange={(e) => {
-                setCreatedAtFilter(e.target.value);
-              }}
-            >
-              <option value={"최신순"}>최신순</option>
-              <option value={"오래된순"}>오래된순</option>
-            </select>
-          </div>
-          <div
-            className={`${styles.topMenu} ${
-              filter === "amount" ? `${styles.selected}` : ""
-            }`}
-          >
-            <span
-              onClick={() => {
-                setFilter("amount");
-              }}
-            >
-              구매가격
-            </span>
-            <select
-              value={amountFilter}
-              onChange={(e) => {
-                setAmountFilter(e.target.value);
-              }}
-            >
-              <option value={"높은 가격 순"}>높은 가격 순</option>
-              <option value={"낮은 가격 순"}>낮은 가격 순</option>
-            </select>
+          <div className={styles.page}>
+            {currentPage > 10 && (
+              <span
+                className={styles.arrow}
+                onClick={() => {
+                  const prevFirstPage =
+                    Math.floor((currentPage - 1) / 10) * 10 - 9;
+                  setCurrentPage(prevFirstPage);
+                }}
+              >
+                <AiOutlineLeft size={12} color={`${mainColor}`} />
+              </span>
+            )}
+            {Array.from(
+              {
+                length: Math.min(
+                  10,
+                  maxPage - Math.floor((currentPage - 1) / 10) * 10
+                ),
+              },
+              (v, i) => Math.floor((currentPage - 1) / 10) * 10 + i + 1
+            ).map((page) => (
+              <span
+                className={page === currentPage ? `${styles.selectPage}` : ``}
+                key={page}
+                onClick={() => {
+                  setCurrentPage(page);
+                }}
+              >
+                {page}
+              </span>
+            ))}
+            {Math.floor((currentPage - 1) / 10) * 10 + 10 < maxPage && (
+              <span
+                className={styles.arrow}
+                onClick={() => {
+                  const nextFirstPage =
+                    Math.floor((currentPage - 1) / 10) * 10 + 11;
+                  setCurrentPage(nextFirstPage);
+                }}
+              >
+                <AiOutlineRight size={12} color={`${mainColor}`} />
+              </span>
+            )}
           </div>
         </div>
-        {/* todo key변경하기 */}
-        <div className={styles.center}>
-          {ordersResponse?.orders.map((order) => (
-            <OrderCard key={order.orderId} order={order} />
-          ))}
-        </div>
-      </div>
-      <div className={styles.page}>
-        {currentPage > 10 && (
-          <span
-            className={styles.arrow}
-            onClick={() => {
-              const prevFirstPage = Math.floor((currentPage - 1) / 10) * 10 - 9;
-              setCurrentPage(prevFirstPage);
-            }}
-          >
-            <AiOutlineLeft size={12} color={`${mainColor}`} />
-          </span>
-        )}
-        {Array.from(
-          {
-            length: Math.min(
-              10,
-              maxPage - Math.floor((currentPage - 1) / 10) * 10
-            ),
-          },
-          (v, i) => Math.floor((currentPage - 1) / 10) * 10 + i + 1
-        ).map((page) => (
-          <span
-            className={page === currentPage ? `${styles.selectPage}` : ``}
-            key={page}
-            onClick={() => {
-              setCurrentPage(page);
-            }}
-          >
-            {page}
-          </span>
-        ))}
-        {Math.floor((currentPage - 1) / 10) * 10 + 10 < maxPage && (
-          <span
-            className={styles.arrow}
-            onClick={() => {
-              const nextFirstPage =
-                Math.floor((currentPage - 1) / 10) * 10 + 11;
-              setCurrentPage(nextFirstPage);
-            }}
-          >
-            <AiOutlineRight size={12} color={`${mainColor}`} />
-          </span>
-        )}
       </div>
     </div>
   );

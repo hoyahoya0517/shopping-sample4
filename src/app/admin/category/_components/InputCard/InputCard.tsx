@@ -2,6 +2,7 @@
 
 import { Dispatch, SetStateAction, useState } from "react";
 import styles from "./InputCard.module.css";
+import { BsCaretUpFill, BsCaretDownFill } from "react-icons/bs";
 export default function InputCard({
   index,
   category,
@@ -35,7 +36,7 @@ export default function InputCard({
               setIsUpdate(false);
             }}
           >
-            확인
+            저장
           </button>
         </div>
       ) : (
@@ -62,6 +63,42 @@ export default function InputCard({
           }}
         >
           삭제
+        </button>
+      </div>
+      <div className={styles.inputCardButton2}>
+        <button
+          disabled={
+            category[index] === "new" || category[index] === "x" || index === 2
+          }
+          onClick={() => {
+            const tmpCategory = category.slice();
+            [tmpCategory[index], tmpCategory[index - 1]] = [
+              tmpCategory[index - 1],
+              tmpCategory[index],
+            ];
+            setCategory(tmpCategory);
+          }}
+        >
+          <BsCaretUpFill color="black" />
+        </button>
+      </div>
+      <div className={styles.inputCardButton2}>
+        <button
+          disabled={
+            category[index] === "new" ||
+            category[index] === "x" ||
+            index === category.length - 1
+          }
+          onClick={() => {
+            const tmpCategory = category.slice();
+            [tmpCategory[index], tmpCategory[index + 1]] = [
+              tmpCategory[index + 1],
+              tmpCategory[index],
+            ];
+            setCategory(tmpCategory);
+          }}
+        >
+          <BsCaretDownFill color="black" />
         </button>
       </div>
     </div>

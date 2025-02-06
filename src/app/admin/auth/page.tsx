@@ -135,126 +135,129 @@ export default function Auth() {
             <button>검색</button>
           </div>
         </form>
-        <div className={styles.top}>
-          <div className={styles.topUser}>
-            <span>사용자</span>
+        <div className={styles.authMain}>
+          <div className={styles.top}>
+            <div className={styles.topUser}>
+              <span>사용자</span>
+            </div>
+            <div
+              className={`${styles.topMenu} ${styles.topName} ${
+                filter === "name" ? `${styles.selected}` : ""
+              }`}
+            >
+              <span
+                onClick={() => {
+                  setFilter("name");
+                }}
+              >
+                이름
+              </span>
+              <select
+                value={nameFilter}
+                onChange={(e) => {
+                  setNameFilter(e.target.value);
+                }}
+              >
+                <option value={"오름차순"}>오름차순</option>
+                <option value={"내림차순"}>내림차순</option>
+              </select>
+            </div>
+            <div
+              className={`${styles.topMenu} ${
+                filter === "createdAt" ? `${styles.selected}` : ""
+              }`}
+            >
+              <span
+                onClick={() => {
+                  setFilter("createdAt");
+                }}
+              >
+                등록일
+              </span>
+              <select
+                value={createdAtFilter}
+                onChange={(e) => {
+                  setCreatedAtFilter(e.target.value);
+                }}
+              >
+                <option value={"최신순"}>최신순</option>
+                <option value={"오래된순"}>오래된순</option>
+              </select>
+            </div>
+            <div
+              className={`${styles.topMenu} ${styles.topAdmin} ${
+                filter === "isAdmin" ? `${styles.selected}` : ""
+              }`}
+            >
+              <span
+                onClick={() => {
+                  setFilter("isAdmin");
+                }}
+              >
+                어드민
+              </span>
+              <select
+                value={isAdminFilter}
+                onChange={(e) => {
+                  setIsAdminFilter(e.target.value);
+                }}
+              >
+                <option value={"어드민o"}>어드민o</option>
+                <option value={"어드민x"}>어드민x</option>
+              </select>
+            </div>
           </div>
-          <div
-            className={`${styles.topMenu} ${styles.topName} ${
-              filter === "name" ? `${styles.selected}` : ""
-            }`}
-          >
-            <span
-              onClick={() => {
-                setFilter("name");
-              }}
-            >
-              이름
-            </span>
-            <select
-              value={nameFilter}
-              onChange={(e) => {
-                setNameFilter(e.target.value);
-              }}
-            >
-              <option value={"오름차순"}>오름차순</option>
-              <option value={"내림차순"}>내림차순</option>
-            </select>
+          <div className={styles.center}>
+            {usersResponse?.users.map((user) => (
+              <AdminUserCard key={user.id} user={user} />
+            ))}
           </div>
-          <div
-            className={`${styles.topMenu} ${
-              filter === "createdAt" ? `${styles.selected}` : ""
-            }`}
-          >
-            <span
-              onClick={() => {
-                setFilter("createdAt");
-              }}
-            >
-              등록일
-            </span>
-            <select
-              value={createdAtFilter}
-              onChange={(e) => {
-                setCreatedAtFilter(e.target.value);
-              }}
-            >
-              <option value={"최신순"}>최신순</option>
-              <option value={"오래된순"}>오래된순</option>
-            </select>
-          </div>
-          <div
-            className={`${styles.topMenu} ${styles.topAdmin} ${
-              filter === "isAdmin" ? `${styles.selected}` : ""
-            }`}
-          >
-            <span
-              onClick={() => {
-                setFilter("isAdmin");
-              }}
-            >
-              어드민
-            </span>
-            <select
-              value={isAdminFilter}
-              onChange={(e) => {
-                setIsAdminFilter(e.target.value);
-              }}
-            >
-              <option value={"어드민o"}>어드민o</option>
-              <option value={"어드민x"}>어드민x</option>
-            </select>
+          <div className={styles.page}>
+            {currentPage > 10 && (
+              <span
+                className={styles.arrow}
+                onClick={() => {
+                  const prevFirstPage =
+                    Math.floor((currentPage - 1) / 10) * 10 - 9;
+                  setCurrentPage(prevFirstPage);
+                }}
+              >
+                <AiOutlineLeft size={12} color={`${mainColor}`} />
+              </span>
+            )}
+            {Array.from(
+              {
+                length: Math.min(
+                  10,
+                  maxPage - Math.floor((currentPage - 1) / 10) * 10
+                ),
+              },
+              (v, i) => Math.floor((currentPage - 1) / 10) * 10 + i + 1
+            ).map((page) => (
+              <span
+                className={page === currentPage ? `${styles.selectPage}` : ``}
+                key={page}
+                onClick={() => {
+                  setCurrentPage(page);
+                }}
+              >
+                {page}
+              </span>
+            ))}
+            {Math.floor((currentPage - 1) / 10) * 10 + 10 < maxPage && (
+              <span
+                className={styles.arrow}
+                onClick={() => {
+                  const nextFirstPage =
+                    Math.floor((currentPage - 1) / 10) * 10 + 11;
+                  setCurrentPage(nextFirstPage);
+                }}
+              >
+                <AiOutlineRight size={12} color={`${mainColor}`} />
+              </span>
+            )}
           </div>
         </div>
-        <div className={styles.center}>
-          {usersResponse?.users.map((user) => (
-            <AdminUserCard key={user.id} user={user} />
-          ))}
-        </div>
-      </div>
-      <div className={styles.page}>
-        {currentPage > 10 && (
-          <span
-            className={styles.arrow}
-            onClick={() => {
-              const prevFirstPage = Math.floor((currentPage - 1) / 10) * 10 - 9;
-              setCurrentPage(prevFirstPage);
-            }}
-          >
-            <AiOutlineLeft size={12} color={`${mainColor}`} />
-          </span>
-        )}
-        {Array.from(
-          {
-            length: Math.min(
-              10,
-              maxPage - Math.floor((currentPage - 1) / 10) * 10
-            ),
-          },
-          (v, i) => Math.floor((currentPage - 1) / 10) * 10 + i + 1
-        ).map((page) => (
-          <span
-            className={page === currentPage ? `${styles.selectPage}` : ``}
-            key={page}
-            onClick={() => {
-              setCurrentPage(page);
-            }}
-          >
-            {page}
-          </span>
-        ))}
-        {Math.floor((currentPage - 1) / 10) * 10 + 10 < maxPage && (
-          <span
-            className={styles.arrow}
-            onClick={() => {
-              const nextFirstPage =
-                Math.floor((currentPage - 1) / 10) * 10 + 11;
-              setCurrentPage(nextFirstPage);
-            }}
-          >
-            <AiOutlineRight size={12} color={`${mainColor}`} />
-          </span>
-        )}
       </div>
     </div>
   );
