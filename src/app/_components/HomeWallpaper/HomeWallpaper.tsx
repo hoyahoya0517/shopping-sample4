@@ -4,7 +4,7 @@
 import styles from "./HomeWallpaper.module.css";
 import { HomeWallpaperType } from "@/type/type";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
 export default function HomeWallpaper({
@@ -27,14 +27,14 @@ export default function HomeWallpaper({
       <video
         className={styles.video}
         src={
-          "https://res.cloudinary.com/hoyahoya/video/upload/v1708061295/letter/video22_vhm7v7.mp4"
+          "https://res.cloudinary.com/hoyahoya/video/upload/v1708061272/letter/star4_zkdhdg.mp4"
         }
         autoPlay
         muted
         loop
         playsInline
       />
-      {width && (
+      {/* {width && (
         <motion.div
           initial={{
             transform: `translate(-50%, -50%) scale(${width > 768 ? 3.5 : 2})`,
@@ -45,7 +45,7 @@ export default function HomeWallpaper({
         >
           <img src="https://res.cloudinary.com/hoyahoya/image/upload/v1708402276/letter/%EC%9D%B4%EC%B9%B4%EB%A6%AC%EC%8B%A0%EC%A7%80%EB%A8%B8%EA%B7%B8%EC%BB%B5/cup_1_uup0zo.png" />
         </motion.div>
-      )}
+      )} */}
     </>
   );
   // return (

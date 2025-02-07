@@ -21,7 +21,7 @@ export default function AdminAddProduct() {
   const [stock, setStock] = useState<Stock[]>([]);
   const [img, setImg] = useState<string[]>([]);
   const [isNew, setIsNew] = useState<boolean>(true);
-  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<boolean>(true);
 
   const [createdAt, setCreatedAt] = useState(
     dayjs(koreaTimeNow()).format("YYYY-MM-DDTHH:mm:ss")
@@ -217,9 +217,9 @@ export default function AdminAddProduct() {
                 </div>
                 <div className={styles.buttonSelect}>
                   <select
-                    value={isVisible ? "숨기기o" : "숨기기x"}
+                    value={isVisible ? "숨기기x" : "숨기기o"}
                     onChange={(e) => {
-                      setIsVisible(e.target.value === "숨기기o" ? true : false);
+                      setIsVisible(e.target.value === "숨기기x" ? true : false);
                     }}
                   >
                     <option value={"숨기기o"}>숨기기o</option>

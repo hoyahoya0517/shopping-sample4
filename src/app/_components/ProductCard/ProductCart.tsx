@@ -3,11 +3,19 @@
 import Link from "next/link";
 import stlyes from "./ProductCart.module.css";
 import { ProductType } from "@/type/type";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ProductCard({ product }: { product: ProductType }) {
   const [onMouse, setOnMouse] = useState(false);
-  if (product.isVisible) return null;
+  const [isSoldout, setIsSoldout] = useState(true);
+  useEffect(() => {
+    if (!product.isVisible) return;
+    product.stock.forEach((stock) => {
+      console.log(stock.qty);
+      if (stock.qty !== 0) setIsSoldout(false);
+    });
+  }, [product]);
+  if (!product.isVisible) return null;
   return (
     <div className={stlyes.productCard}>
       <Link
@@ -35,7 +43,12 @@ export default function ProductCard({ product }: { product: ProductType }) {
         />
       </Link>
       <Link href={`/collections/product/${product.id}`}>{product.name}</Link>
-      <p>{`₩${product.price}`}</p>
+      <div className={stlyes.bottom}>
+        <p>{`₩${product.price}`}</p>
+        <p className={`${isSoldout ? stlyes.soldOut : stlyes.notSoldOut}`}>
+          Sold Out
+        </p>
+      </div>
     </div>
   );
 }

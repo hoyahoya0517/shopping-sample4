@@ -287,10 +287,10 @@ export default function AdminProductCard({
                   </div>
                   <div className={styles.buttonSelect}>
                     <select
-                      value={isVisible ? "숨기기o" : "숨기기x"}
+                      value={isVisible ? "숨기기x" : "숨기기o"}
                       onChange={(e) => {
                         setIsVisible(
-                          e.target.value === "숨기기o" ? true : false
+                          e.target.value === "숨기기x" ? true : false
                         );
                       }}
                     >

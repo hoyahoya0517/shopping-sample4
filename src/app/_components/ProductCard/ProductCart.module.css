@@ -16,6 +16,20 @@
   object-position: center;
   aspect-ratio: 200/300;
 }
+.bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.soldOut {
+  font-size: 0.7rem;
+  color: var(--graygray-color);
+}
+.notSoldOut {
+  font-size: 0.7rem;
+  visibility: hidden;
+}
 @media (max-width: 768px) {
   .productCard {
     width: 50%;
