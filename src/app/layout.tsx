@@ -7,9 +7,15 @@ import AuthSession from "./_config/SessionProvider";
 import NavMenu from "./_components/NavMenu/NavMenu";
 import SearchMenu from "./_components/SearchMenu/SearchMenu";
 import { Analytics } from "@vercel/analytics/next";
+import { Noto_Sans_KR } from "next/font/google";
 
 export const metadata: Metadata = {
   title: `스타스프레이`, // 브랜드 이름
+  openGraph: {
+    title: `스타스프레이`,
+    description: `항상 귀여운 것을 찾는 당신을 위한 샵`,
+    images: "/images/apple-icon.png",
+  },
   description: `항상 귀여운 것을 찾는 당신을 위한 샵`, // 브랜드 설명
   other: {
     "google-site-verification": "z51t_yEWb2JkWC3tHdtTJOowpAhKeiiEdLAfcK2kJrk",
@@ -19,13 +25,20 @@ export const metadata: Metadata = {
   },
 };
 
+const font = Noto_Sans_KR({
+  weight: ["400", "700"],
+  style: ["normal"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" className={`${font.className}`}>
       <link rel="icon" href="/images/favicon.ico" sizes="48x48" />
       <link
         rel="apple-touch-icon"

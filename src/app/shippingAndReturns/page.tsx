@@ -47,7 +47,7 @@ export default function ShippingAndReturns() {
             주셔야 합니다.
             <br />
             <br />
-            반품주소 / 서울시 송파구 가락동77-4 305
+            반품주소 / 서울시 송파구 가락동77-4
             {/* 반품주소 브랜드주소 입력 */}
           </p>
           <br />
