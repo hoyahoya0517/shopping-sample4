@@ -45,20 +45,6 @@ export default function AdminAddProduct() {
   };
   const addProductMutate = useMutation({
     mutationFn: async () => {
-      console.log("dd", category);
-      if (
-        !name ||
-        !price ||
-        !category ||
-        !img ||
-        !stock ||
-        !description ||
-        !createdAt
-      )
-        return alert("상품 정보를 입력하세요.");
-      if (img.length < 2) return alert("이미지는 최소 2개 이상이어야 합니다.");
-      if (stock.length < 1)
-        return alert("사이즈는 최소 1개 이상이어야 합니다.");
       await addAdminProduct(
         name,
         price,
@@ -83,7 +69,7 @@ export default function AdminAddProduct() {
         queryKey: ["admin", "collections"],
       });
       setIsNew(true);
-      setIsVisible(false);
+      setIsVisible(true);
     },
     onError: () => {
       alert("문제가 발생했습니다. 다시 시도하세요.");
@@ -179,7 +165,7 @@ export default function AdminAddProduct() {
                   />
                 ))}
                 <div className={styles.listTip} style={{ color: "red" }}>
-                  <p>이미지 파일은 최소 2개 이상으로 설정해주세요.</p>
+                  <p>이미지는 최소 1개 이상으로 설정해주세요.</p>
                 </div>
               </div>
             </div>
@@ -231,6 +217,20 @@ export default function AdminAddProduct() {
                 <button
                   type="submit"
                   onClick={() => {
+                    if (
+                      !name ||
+                      !price ||
+                      !category ||
+                      !img ||
+                      !stock ||
+                      !description ||
+                      !createdAt
+                    )
+                      return alert("상품 정보를 입력하세요.");
+                    if (img.length < 1)
+                      return alert("이미지는 최소 1개 이상이어야 합니다.");
+                    if (stock.length < 1)
+                      return alert("사이즈는 최소 1개 이상이어야 합니다.");
                     addProductMutate.mutate();
                   }}
                 >

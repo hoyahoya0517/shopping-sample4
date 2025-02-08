@@ -5,7 +5,7 @@ import styles from "./Product.module.css";
 import { ProductType } from "@/type/type";
 import { getProduct } from "@/actions/product";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addToCart } from "@/actions/auth";
 import { useCartIsChangeStore } from "@/store/store";
 import LoadingWithoutPadding from "@/app/_components/LoadingWithoutPadding/LoadingWithoutPadding";
@@ -15,6 +15,7 @@ export default function Product({ id }: { id: string }) {
   const { data: session } = useSession();
   const [message, setMessage] = useState("");
   const [selectSize, setSelectSize] = useState<string>("");
+  const [isSoldout, setIsSoldout] = useState(true);
   const { setCartIsChange } = useCartIsChangeStore();
   const { data: product, isLoading } = useQuery<ProductType>({
     queryKey: ["product", id],
@@ -49,6 +50,14 @@ export default function Product({ id }: { id: string }) {
     addToCartMutate.mutate();
   };
 
+  useEffect(() => {
+    if (!product) return;
+    product.stock.forEach((stock) => {
+      console.log(stock.qty);
+      if (stock.qty !== 0) setIsSoldout(false);
+    });
+  }, [product]);
+  if (!product || !product.isVisible) return null;
   if (isLoading) return <LoadingWithoutPadding />;
   return (
     <div className={styles.main}>
@@ -87,9 +96,20 @@ export default function Product({ id }: { id: string }) {
         </div>
         {product && (
           <div className={styles.buttonDiv}>
-            <button onClick={handleAddToCart} className={styles.button}>
-              ADD TO CART
-            </button>
+            {isSoldout ? (
+              <button
+                onClick={() => {
+                  return;
+                }}
+                className={styles.buttonSoldOut}
+              >
+                SOLD OUT
+              </button>
+            ) : (
+              <button onClick={handleAddToCart} className={styles.button}>
+                ADD TO CART
+              </button>
+            )}
             {message && <span className={styles.message}>{message}</span>}
           </div>
         )}

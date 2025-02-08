@@ -20,6 +20,7 @@ export default function Footer() {
           >
             STAR SPRAY {/* 브랜드 이름 */}
           </span>
+          {/* 브랜드 이름 */}
           <div className={styles.topMenu}>
             <Link href="/legal">Legal</Link>
             <Link href="/contact">Contact</Link>
@@ -30,7 +31,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Instagram {/* 브랜드 인스타그램 링크 */}
+              Instagram
             </Link>
           </div>
           <span></span>
@@ -39,7 +40,7 @@ export default function Footer() {
           <div className={styles.bottom}>
             <p>
               법인명 : 스타스프레이 | 대표 : 이건호 | 이메일 :
-              help.starspray@gmail.com | 전화 : 02-6486-6828
+              help.starspray@gmail.com | 전화 : 010-6272-6828
             </p>
             <p>
               사업자 등록번호 : 568-03-02882 | 통신판매업 신고 :

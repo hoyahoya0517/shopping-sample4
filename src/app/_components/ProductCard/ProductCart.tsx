@@ -39,7 +39,13 @@ export default function ProductCard({ product }: { product: ProductType }) {
             if (isIos) return;
             setOnMouse(false);
           }}
-          src={onMouse ? product.img[1] : product.img[0]}
+          src={
+            onMouse
+              ? product.img[1]
+                ? product.img[1]
+                : product.img[0]
+              : product.img[0]
+          }
         />
       </Link>
       <Link href={`/collections/product/${product.id}`}>{product.name}</Link>

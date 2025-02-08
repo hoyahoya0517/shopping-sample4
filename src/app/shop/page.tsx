@@ -7,7 +7,7 @@ export default function Shop() {
         <div className={styles.top}>
           <span>Shop</span>
         </div>
-        <div className={styles.center}></div>
+        <div className={styles.center}>현재는 온라인샵만 운영중입니다.</div>
       </div>
     </div>
   );
