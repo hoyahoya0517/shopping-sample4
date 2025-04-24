@@ -7,6 +7,10 @@ html {
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #1ba11a
+    url("https://res.cloudinary.com/hoyahoya/image/upload/v1702882191/letter/tile_vkvmea.png")
+    top left repeat;
+  background-size: 18%;
 }
 
 body {
@@ -22,11 +26,12 @@ body {
   -ms-user-select: none;
   user-select: none;
 
-  --font-color: #7c1b25;
-  --main-color: #7c1b25;
-  --gray-color: #cacbdc;
+  --font-color: #ffe107;
+  /* //#7c1b25 */
+  --main-color: #ffe107;
+  --gray-color: #ffe107; /* #cacbdc; */
   --graygray-color: rgba(18, 17, 16, 0.6);
-  --message-font-color: #41a1e6;
+  --message-font-color: white;
   --disabled-color: #e2e8f0;
   --cursor-color: #f8fafc;
 }
@@ -38,9 +43,13 @@ button {
   font-weight: 400;
   font-optical-sizing: auto;
   color: var(--font-color);
+  background-color: transparent;
 }
 input {
   line-height: 1.5em;
+}
+input::placeholder {
+  color: var(--graygray-color);
 }
 label {
   color: var(--graygray-color);
@@ -64,7 +73,6 @@ select {
   background-position: right 6px center;
   background-size: 16px;
   transition: all 0.2s ease;
-  background-color: transparent;
   text-align: center;
 }
 @media (max-width: 768px) {
@@ -79,6 +87,11 @@ img {
   -moz-user-drag: none;
   -o-user-drag: none;
   user-drag: none;
+}
+@media (max-width: 767px) {
+  html {
+    background-size: 45%;
+  }
 }
 
 /* calendar css */

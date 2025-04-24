@@ -62,7 +62,7 @@ export default function Product({ id }: { id: string }) {
   return (
     <div className={styles.main}>
       <div className={styles.left}>
-        {product?.img.map((image, index) => (
+        {product?.img.slice(1).map((image, index) => (
           <div className={styles.image} key={index}>
             <img src={image} />
           </div>

@@ -15,10 +15,9 @@
   display: flex;
 }
 .image img {
-  z-index: -1;
   width: 100%;
   object-fit: cover;
-  aspect-ratio: 200/300;
+  aspect-ratio: 200/200;
 }
 .right {
   height: 100%;

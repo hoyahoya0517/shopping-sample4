@@ -26,13 +26,13 @@ export default function Footer() {
             <Link href="/contact">Contact</Link>
             <Link href="/shop">Shop</Link>
             <Link href="/shippingAndReturns">Shipping and Returns</Link>
-            <Link
+            {/* <Link
               href="https://www.instagram.com"
               target="_blank"
               rel="noopener noreferrer"
             >
               Instagram
-            </Link>
+            </Link> */}
           </div>
           <span></span>
         </div>

@@ -6,7 +6,7 @@ import { ProductType } from "@/type/type";
 import { useEffect, useState } from "react";
 
 export default function ProductCard({ product }: { product: ProductType }) {
-  const [onMouse, setOnMouse] = useState(false);
+  // const [onMouse, setOnMouse] = useState(false);
   const [isSoldout, setIsSoldout] = useState(true);
   useEffect(() => {
     if (!product.isVisible) return;
@@ -23,29 +23,30 @@ export default function ProductCard({ product }: { product: ProductType }) {
         href={`/collections/product/${product.id}`}
       >
         <img
-          onMouseEnter={() => {
-            const userAgent = window.navigator.userAgent.toLowerCase();
-            const isIos =
-              userAgent.indexOf("iphone") > -1 ||
-              (userAgent.indexOf("ipad") > -1 && "ontouchend" in document);
-            if (isIos) return;
-            setOnMouse(true);
-          }}
-          onMouseLeave={() => {
-            const userAgent = window.navigator.userAgent.toLowerCase();
-            const isIos =
-              userAgent.indexOf("iphone") > -1 ||
-              (userAgent.indexOf("ipad") > -1 && "ontouchend" in document);
-            if (isIos) return;
-            setOnMouse(false);
-          }}
-          src={
-            onMouse
-              ? product.img[1]
-                ? product.img[1]
-                : product.img[0]
-              : product.img[0]
-          }
+          // onMouseEnter={() => {
+          //   const userAgent = window.navigator.userAgent.toLowerCase();
+          //   const isIos =
+          //     userAgent.indexOf("iphone") > -1 ||
+          //     (userAgent.indexOf("ipad") > -1 && "ontouchend" in document);
+          //   if (isIos) return;
+          //   setOnMouse(true);
+          // }}
+          // onMouseLeave={() => {
+          //   const userAgent = window.navigator.userAgent.toLowerCase();
+          //   const isIos =
+          //     userAgent.indexOf("iphone") > -1 ||
+          //     (userAgent.indexOf("ipad") > -1 && "ontouchend" in document);
+          //   if (isIos) return;
+          //   setOnMouse(false);
+          // }}
+          // src={
+          //   onMouse
+          //     ? product.img[1]
+          //       ? product.img[1]
+          //       : product.img[0]
+          //     : product.img[0]
+          // }
+          src={product.img[0]}
         />
       </Link>
       <Link href={`/collections/product/${product.id}`}>{product.name}</Link>

@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { mainColor } from "@/app/_config/ColorSetting";
 
 export default function SearchMenu() {
-  const { setNavOn } = useNavStore();
+  const { navOn, setNavOn } = useNavStore();
   const { searchOn, setSearchOn } = useSearchStore();
   const [search, setSearch] = useState("");
   const [scrollY, setScrollY] = useState<number>(0);
@@ -28,6 +28,7 @@ export default function SearchMenu() {
     const isIos =
       userAgent.indexOf("iphone") > -1 ||
       (userAgent.indexOf("ipad") > -1 && "ontouchend" in document);
+    if (navOn) return;
     if (searchOn) {
       if (isIos) {
         const tmpScrollY = window.scrollY;

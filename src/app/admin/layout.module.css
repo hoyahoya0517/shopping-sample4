@@ -1,5 +1,8 @@
 .container {
   color: black;
+  --font-color: black;
+  --gray-color: #cacbdc;
+  background-color: white;
 }
 .container a {
   color: black;

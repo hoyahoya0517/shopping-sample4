@@ -12,8 +12,8 @@
 .image {
   display: flex;
   text-align: left;
-  width: 66px;
-  min-width: 66px;
+  width: 100px;
+  min-width: 100px;
   margin-right: 24px;
   flex: 0 0 auto;
 }
@@ -42,7 +42,7 @@
   z-index: -1;
   width: 100%;
   object-fit: cover;
-  aspect-ratio: 200/300;
+  aspect-ratio: 200/200;
 }
 @media (max-width: 768px) {
   .product {
