@@ -13,10 +13,10 @@ export const metadata: Metadata = {
   title: `스타스프레이`, // 브랜드 이름
   openGraph: {
     title: `스타스프레이`,
-    description: `항상 귀여운 것을 찾는 당신을 위한 샵`,
+    description: `귀여운 것만 팝니다`,
     images: "/images/apple-icon.png",
   },
-  description: `항상 귀여운 것을 찾는 당신을 위한 샵`, // 브랜드 설명
+  description: `귀여운 것만 팝니다`, // 브랜드 설명
   other: {
     "google-site-verification": "z51t_yEWb2JkWC3tHdtTJOowpAhKeiiEdLAfcK2kJrk",
     "naver-site-verification": "3e6288a5a45db0b37299ef3b4859b4f466b98192",
