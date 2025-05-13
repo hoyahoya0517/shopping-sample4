@@ -11,6 +11,7 @@ html {
     url("https://res.cloudinary.com/hoyahoya/image/upload/v1702882191/letter/tile_vkvmea.png")
     top left repeat;
   background-size: 18%;
+  overflow: hidden;
 }
 
 body {
