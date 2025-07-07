@@ -3,38 +3,57 @@
 import Link from "next/link";
 import styles from "./Footer.module.css";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 export default function Footer() {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
   useEffect(() => {
     if (isOpen) window.scrollTo(0, 9999999);
   }, [isOpen]);
   return (
     <div className={styles.footer}>
+      <motion.div
+        className={styles.logo}
+        initial={{
+          bottom: "50%",
+          right: "50%",
+          transform: "translate(50%, 50%) scale(8)",
+        }}
+        animate={{
+          bottom: "1%",
+          right: "0",
+          transform: "translate(0, 0) scale(1)",
+        }}
+        transition={{ duration: 1, delay: 1, ease: "easeOut" }}
+      >
+        <img
+          onClick={() => {
+            router.push("/");
+          }}
+          src="https://res.cloudinary.com/hoyahoya/image/upload/v1710141096/letter/logo/logo_144_sjjqqr.png"
+        />
+      </motion.div>
       <div className={styles.main}>
         <div className={styles.top}>
-          <span
-            onClick={() => {
-              setIsOpen((prev) => !prev);
-            }}
-          >
-            STAR SPRAY {/* 브랜드 이름 */}
-          </span>
+          <div className={styles.brandName}>
+            <span
+              onClick={() => {
+                setIsOpen((prev) => !prev);
+              }}
+            >
+              STAR SPRAY {/* 브랜드 이름 */}
+            </span>
+          </div>
           {/* 브랜드 이름 */}
           <div className={styles.topMenu}>
             <Link href="/legal">Legal</Link>
             <Link href="/contact">Contact</Link>
             <Link href="/shop">Shop</Link>
             <Link href="/shippingAndReturns">Shipping and Returns</Link>
-            {/* <Link
-              href="https://www.instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Instagram
-            </Link> */}
+            <p>Instagram</p>
           </div>
-          <span></span>
         </div>
         {isOpen && (
           <div className={styles.bottom}>

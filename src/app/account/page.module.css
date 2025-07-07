@@ -78,18 +78,11 @@
   flex-direction: column;
 }
 .updateButton button {
-  cursor: pointer;
   width: 100%;
   height: 50px;
-  border: none;
-  background: var(--main-color);
-  color: #f9f9f9;
 }
 .updateButton button:hover {
-  cursor: pointer;
   border: 3px solid var(--main-color);
-  background-color: #f9f9f9;
-  color: var(--font-color);
 }
 .updateProfile {
   cursor: pointer;

@@ -35,9 +35,9 @@
 .button {
   width: 400px;
   height: 50px;
-  border: none;
-  background: var(--main-color);
-  color: #f9f9f9;
+}
+.button:hover {
+  border: 3px solid var(--main-color);
 }
 .menu {
   display: flex;
@@ -48,12 +48,6 @@
 }
 .menu > a {
   border-bottom: 1px solid var(--main-color);
-}
-.button:hover {
-  cursor: pointer;
-  border: 3px solid var(--main-color);
-  background-color: #f9f9f9;
-  color: var(--font-color);
 }
 .message {
   align-self: flex-start;

@@ -53,7 +53,6 @@ export default function Product({ id }: { id: string }) {
   useEffect(() => {
     if (!product) return;
     product.stock.forEach((stock) => {
-      console.log(stock.qty);
       if (stock.qty !== 0) setIsSoldout(false);
     });
   }, [product]);

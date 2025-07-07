@@ -62,10 +62,14 @@
   justify-content: center;
 }
 .searchBarButton > button {
+  color: var(--main-color);
   cursor: pointer;
   border: none;
   background-color: transparent;
   padding: 5px;
+}
+.searchBarButton > button:hover {
+  background-color: transparent;
 }
 @media (max-width: 768px) {
   .searchOn {

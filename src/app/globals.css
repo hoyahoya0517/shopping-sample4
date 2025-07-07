@@ -31,19 +31,33 @@ body {
   --main-color: #ffe107;
   --gray-color: #ffe107; /* #cacbdc; */
   --graygray-color: rgba(18, 17, 16, 0.6);
-  --message-font-color: white;
+  --message-font-color: #ffffff;
   --disabled-color: #e2e8f0;
   --cursor-color: #f8fafc;
 }
-input,
+input {
+  font-size: 1rem;
+  font-family: "Noto Sans KR", serif;
+  font-style: normal;
+  font-weight: 400;
+  font-optical-sizing: auto;
+  background-color: transparent;
+  color: var(--font-color);
+}
 button {
   font-size: 1rem;
   font-family: "Noto Sans KR", serif;
   font-style: normal;
   font-weight: 400;
   font-optical-sizing: auto;
+  border: none;
+  background: var(--main-color);
+  color: #ffffff;
+}
+button:hover {
+  cursor: pointer;
+  background-color: #ccb300;
   color: var(--font-color);
-  background-color: transparent;
 }
 input {
   line-height: 1.5em;

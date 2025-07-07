@@ -188,7 +188,6 @@ export default function Sales() {
     setReturnArray(tmpReturnArray);
   }, [orders, value]);
 
-  console.log(returnArray);
   if (isLoading) return <Loading />;
   return (
     <div className={styles.sales}>

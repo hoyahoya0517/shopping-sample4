@@ -11,7 +11,6 @@ export default function ProductCard({ product }: { product: ProductType }) {
   useEffect(() => {
     if (!product.isVisible) return;
     product.stock.forEach((stock) => {
-      console.log(stock.qty);
       if (stock.qty !== 0) setIsSoldout(false);
     });
   }, [product]);

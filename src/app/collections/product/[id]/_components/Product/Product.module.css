@@ -27,16 +27,18 @@
   padding: 0 5%;
   display: flex;
   flex-direction: column;
-  gap: 40px;
 }
 .top {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 12px;
 }
 .size {
   flex-wrap: wrap;
   display: flex;
   gap: 20px;
+  margin-bottom: 56px;
+  color: white;
 }
 .soldOut {
   position: relative;
@@ -55,20 +57,17 @@
   left: 50%;
   top: 1.5em;
   transform: translate(-50%);
-  background-color: var(--main-color);
+  background-color: white;
+}
+.buttonDiv {
+  margin-bottom: 56px;
 }
 .button {
   width: 100%;
   height: 50px;
-  border: none;
-  background: var(--main-color);
-  color: #f9f9f9;
 }
 .button:hover {
-  cursor: pointer;
   border: 3px solid var(--main-color);
-  background-color: #f9f9f9;
-  color: var(--font-color);
 }
 .error > span {
   color: rgb(255, 0, 0);
@@ -86,7 +85,12 @@
   width: 100%;
   height: 50px;
   border: 1px solid var(--gray-color);
-  background: white;
+  background: transparent;
+  color: var(--gray-color);
+}
+.buttonSoldOut:hover {
+  border: 1px solid var(--gray-color);
+  background: transparent;
   color: var(--gray-color);
 }
 /* .buttonSoldOut:hover {

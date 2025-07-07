@@ -153,7 +153,6 @@ export default function Order() {
         zipcode: zipcode,
       },
     });
-    console.log(payment);
     if (!payment) return;
     if (payment.code !== undefined) {
       setBilling(false);

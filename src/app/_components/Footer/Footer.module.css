@@ -3,6 +3,16 @@
   position: relative;
   width: 100%;
 }
+.logo {
+  z-index: 9999;
+  position: fixed;
+  bottom: 5px;
+  right: 0;
+}
+.logo img {
+  cursor: pointer;
+  width: 90px;
+}
 .main {
   display: flex;
   flex-direction: column;
@@ -17,18 +27,22 @@
   display: flex;
   gap: 12px;
 }
-.top span {
+.brandName {
   flex-basis: 15%;
+}
+.brandName span {
   cursor: pointer;
 }
 .topMenu {
   flex: 1;
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
 }
 .topMenu a {
-  padding-right: 16px;
+  margin-right: 24px;
+}
+.topMenu p {
+  color: #ccb300;
 }
 .bottom {
   font-size: 0.7rem;

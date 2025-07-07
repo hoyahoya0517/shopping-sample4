@@ -45,6 +45,9 @@
   display: inline-block;
   border: 1px solid var(--gray-color);
 }
+.qty > button {
+  color: var(--main-color);
+}
 .qty > button:nth-child(1) {
   cursor: pointer;
   width: 27px;

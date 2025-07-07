@@ -84,18 +84,11 @@
   padding: 0 5%;
 }
 .checkOut button {
-  cursor: pointer;
   width: 100%;
   height: 50px;
-  border: none;
-  background: var(--main-color);
-  color: #f9f9f9;
 }
 .checkOut button:hover {
-  cursor: pointer;
   border: 3px solid var(--main-color);
-  background-color: #f9f9f9;
-  color: var(--font-color);
 }
 @media (max-width: 768px) {
   .yourCart {
