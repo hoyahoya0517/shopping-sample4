@@ -7,18 +7,21 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function Login() {
+  const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     const user = await signIn("credentials", {
       email,
       password,
       redirect: false,
     });
     if (user?.error) {
+      setIsLoading(false);
       setMessage(
         "이메일 또는 비밀번호를 잘못 입력하셨습니다. (비밀번호는 6자 이상 20자 이하)"
       );
@@ -59,9 +62,15 @@ export default function Login() {
           />
         </div>
         <div className={styles.buttonDiv}>
-          <button type="submit" className={styles.button}>
-            로그인
-          </button>
+          {isLoading ? (
+            <div className={styles.loading}>
+              <div className={styles.loader}></div>
+            </div>
+          ) : (
+            <button type="submit" className={styles.button}>
+              로그인
+            </button>
+          )}
           {message && <span className={styles.message}>{message}</span>}
         </div>
         <div className={styles.menu}>

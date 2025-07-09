@@ -46,6 +46,12 @@
   background: var(--main-color);
   color: #f9f9f9;
 }
+.disabledButton:hover {
+  border: none;
+  background: var(--main-color);
+  color: #f9f9f9;
+  cursor: default;
+}
 .menu {
   display: flex;
   flex-direction: column;
