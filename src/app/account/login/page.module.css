@@ -103,4 +103,7 @@
   .button {
     width: 100%;
   }
+  .loading {
+    width: 100%;
+  }
 }
