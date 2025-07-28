@@ -62,7 +62,7 @@ export default function Login() {
           />
         </div>
         <div className={styles.buttonDiv}>
-          {!isLoading ? (
+          {isLoading ? (
             <div className={styles.loading}>
               <div className={styles.loader}></div>
             </div>
