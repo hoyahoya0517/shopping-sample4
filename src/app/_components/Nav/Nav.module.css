@@ -9,6 +9,7 @@
 }
 .leftMenu {
   display: flex;
+  font-size: 56px;
 }
 .leftMenu > span {
   cursor: pointer;
@@ -17,27 +18,40 @@
 .main {
   width: 100%;
   height: 100%;
-  padding: 10px 50px;
+  padding: 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .rightMenu {
   display: flex;
-  gap: 12px;
+  gap: 16px;
 }
 .rightMenu > span {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rightMenu > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .cart {
   position: relative;
   display: flex;
 }
+.cart > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .heart {
   z-index: 3333;
   display: flex;
   position: absolute;
-  right: 50%;
+  left: 50%;
   bottom: 6%;
 }
 /* 모바일 */

@@ -9,21 +9,25 @@ import {
   useSearchStore,
 } from "@/store/store";
 import { useSession } from "next-auth/react";
-import { UserType } from "@/type/type";
-import { getUserInfo } from "@/actions/auth";
-import { useQuery } from "@tanstack/react-query";
+// import { UserType } from "@/type/type";
+// import { getUserInfo } from "@/actions/auth";
+// import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { mainColor } from "@/app/_config/ColorSetting";
 import { BsFillHeartFill } from "react-icons/bs";
 import { motion, useAnimate } from "motion/react";
+import { IoSearch } from "react-icons/io5";
+import { FaRegUser } from "react-icons/fa";
+import { RiShoppingBagLine } from "react-icons/ri";
+import { MdOutlineStorefront } from "react-icons/md";
 
 export default function Nav() {
   const [width, setWidth] = useState<number | undefined>();
   const { data: session } = useSession();
-  const { data: userInfo } = useQuery<UserType>({
-    queryKey: ["account"],
-    queryFn: () => getUserInfo(),
-  });
+  // const { data: userInfo } = useQuery<UserType>({
+  //   queryKey: ["account"],
+  //   queryFn: () => getUserInfo(),
+  // });
   const [scope, animate] = useAnimate();
   const { setNavOn } = useNavStore();
   const { setSearchOn } = useSearchStore();
@@ -38,9 +42,17 @@ export default function Nav() {
   }, []);
   useEffect(() => {
     const heartAnimation = async () => {
-      await animate(scope.current, { opacity: 1, y: 0 }, { duration: 1 });
+      await animate(
+        scope.current,
+        { opacity: 1, transform: "translate(-50%,-50%)" },
+        { duration: 1 }
+      );
       await animate(scope.current, { opacity: 0 }, { duration: 0.8 });
-      await animate(scope.current, { y: -150 }, { duration: 0 });
+      await animate(
+        scope.current,
+        { transform: "translate(-50%,-200%)" },
+        { duration: 0 }
+      );
     };
     if (cartIsChange) {
       setCartIsChange(false);
@@ -60,7 +72,7 @@ export default function Nav() {
                   setNavOn(true);
                 }}
               >
-                <AiOutlineMenu size={24} color={`${mainColor}`} />
+                <AiOutlineMenu size={32} color={`${mainColor}`} />
               </span>
             )
           ) : (
@@ -68,27 +80,44 @@ export default function Nav() {
           )}
         </div>
         <div className={styles.rightMenu}>
-          <Link href={"/collections/new?page=1"}>SHOP</Link>
+          <Link href={"/collections/new?page=1"}>
+            <MdOutlineStorefront size={53} color={`${mainColor}`} />
+          </Link>
           <span
             onClick={() => {
               setSearchOn(true);
             }}
           >
-            SEARCH
+            <IoSearch size={48} color={`${mainColor}`} />
           </span>
           {session?.user?.email ? (
-            <Link href={"/account"}>ACCOUNT</Link>
+            <Link href={"/account"}>
+              <FaRegUser size={40} color={`${mainColor}`} />
+            </Link>
           ) : (
-            <Link href={"/account/login"}>LOGIN</Link>
+            <Link href={"/account/login"}>
+              <FaRegUser size={40} color={`${mainColor}`} />
+            </Link>
           )}
           <div className={styles.cart}>
-            <Link href={"/cart"}>{`CART(${
+            <Link href={"/cart"}>
+              {width !== undefined ? (
+                width > 768 ? (
+                  <RiShoppingBagLine size={47} color={`${mainColor}`} />
+                ) : (
+                  <RiShoppingBagLine size={32} color={`${mainColor}`} />
+                )
+              ) : (
+                <></>
+              )}
+            </Link>
+            {/* <Link href={"/cart"}>{`CART(${
               userInfo ? userInfo.cart.length : "0"
-            })`}</Link>
+            })`}</Link> */}
             <motion.span
               ref={scope}
               className={styles.heart}
-              initial={{ opacity: 0, y: -150 }}
+              initial={{ opacity: 0, transform: "translate(-50%,-300%)" }}
             >
               <BsFillHeartFill color="red" />
             </motion.span>
