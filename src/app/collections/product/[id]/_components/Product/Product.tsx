@@ -69,7 +69,7 @@ export default function Product({ id }: { id: string }) {
       </div>
       <div className={styles.right}>
         <div className={styles.top}>
-          <span>{product?.name}</span>
+          <span className={styles.name}>{product?.name}</span>
           <span>{product ? `₩${product?.price}` : ""}</span>
         </div>
         <div className={styles.size}>
