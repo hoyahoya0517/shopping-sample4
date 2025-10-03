@@ -103,7 +103,7 @@ export default function Nav() {
             <Link href={"/cart"}>
               {width !== undefined ? (
                 width > 768 ? (
-                  <RiShoppingBagLine size={47} color={`${mainColor}`} />
+                  <RiShoppingBagLine size={46.5} color={`${mainColor}`} />
                 ) : (
                   <RiShoppingBagLine size={32} color={`${mainColor}`} />
                 )

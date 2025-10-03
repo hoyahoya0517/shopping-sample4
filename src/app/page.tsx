@@ -1,7 +1,6 @@
 import { getHomeWallpaper } from "@/actions/home";
 import styles from "./page.module.css";
 import HomeWallpaper from "./_components/HomeWallpaper/HomeWallpaper";
-import Link from "next/link";
 
 export default async function Home() {
   const homeWallpaper = await getHomeWallpaper();
@@ -10,7 +9,7 @@ export default async function Home() {
       <div className={styles.top}>
         <HomeWallpaper homeWallpaper={homeWallpaper} />
       </div>
-      <div className={styles.bottom}>
+      {/* <div className={styles.bottom}>
         <div className={styles.bottomLeft}>
           <div className={styles.info}>
             <Link href={"/collections/new?page=1"}>New Arrivals</Link>
@@ -32,7 +31,7 @@ export default async function Home() {
             playsInline
           />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

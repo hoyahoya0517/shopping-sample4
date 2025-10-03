@@ -36,6 +36,7 @@
   border: none;
   background-color: transparent;
   padding: 5px;
+  color: var(--main-color);
 }
 .products {
   display: flex;

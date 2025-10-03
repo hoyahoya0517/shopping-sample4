@@ -56,7 +56,7 @@ export default function SearchMenu() {
             setSearchOn(false);
           }}
         >
-          <BsXLg size={24} color={`${mainColor}`} />
+          <BsXLg size={32} color={`${mainColor}`} />
         </span>
       </div>
       <div className={styles.main}>
