@@ -85,7 +85,7 @@
 }
 .image img {
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
   aspect-ratio: 200/200;
 }
 .message {

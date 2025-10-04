@@ -41,7 +41,7 @@
 .image img {
   z-index: -1;
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
   aspect-ratio: 200/200;
 }
 @media (max-width: 768px) {
