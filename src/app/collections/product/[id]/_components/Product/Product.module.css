@@ -17,7 +17,6 @@
 .image img {
   width: 100%;
   object-fit: contain;
-  aspect-ratio: 200/200;
 }
 .right {
   height: 100%;
